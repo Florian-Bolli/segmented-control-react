@@ -5,9 +5,6 @@ import './segmented-control-react.css';
 export default class SegmentedControl extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            selectedSegment: 0,
-        };
         this.renderSegments = this.renderSegments.bind(this);
     }
     static defaultProps = {
@@ -22,18 +19,16 @@ export default class SegmentedControl extends Component {
             console.error('Selected segment cannot be disabled');
         }
 
-        this.setState({ selectedSegment: selected });
     }
 
     onChange = selectedSegment => {
-        this.setState({ selectedSegment });
         this.props.onChangeSegment(selectedSegment);
     };
 
     renderSegments = () => {
         return (
             this.props.segments.map((segment, i) => {
-                if (i === this.state.selectedSegment) {
+                if (i === this.props.selected) {
                     return (
                         <li
                             key={i}
